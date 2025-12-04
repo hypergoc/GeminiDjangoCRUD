@@ -1,0 +1,64 @@
+<!-- templates/admin/gemini/geminiquery/change_list.html -->
+
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_modify %}
+
+{% block content_title %}
+    <h1>Gemini - AI Asistent & File Editor</h1>
+{% endblock %}
+
+{% block result_list %}
+
+    <!-- === JEDINSTVENA KONTROLNA PLOČA === -->
+    <div style="padding: 15px; border: 1px solid #444; margin-bottom: 20px; background-color: #f9f9f9;">
+        <h3 style="margin-top: 0;">Novi AI Query</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 15px;">
+                <label for="ai_question_textarea" style="font-weight: bold;">Postavi pitanje ili daj direktivu:</label>
+                <textarea name="ai_question" id="ai_question_textarea" rows="4" style="width: 100%; margin-top: 5px;"></textarea>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="folder_select" style="font-weight: bold;">(Opcionalno) Uključi sadržaj foldera u kontekst:</label>
+                <select name="folder_to_read" id="folder_select" style="width: 100%; margin-top: 5px;">
+                    <option value="">-- Bez dodatnog konteksta --</option>
+                    {% for folder in project_folders %}
+                        <option value="{{ folder }}">{{ folder }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="folder_select" style="font-weight: bold;">Broj prijašnjih odgovora u historyju:
+                    <input name="history_value_setting" id="history_value_setting" style="width: 100%; margin-top: 5px;" value="{{ history_count }}" />
+                </label>
+            </div>
+
+            <button type="submit" name="_run_ai_query" class="button">
+                Pokreni AI Query
+            </button>
+        </form>
+    </div>
+
+    <!-- Originalna Django lista zapisa iz baze -->
+    {% if result_list %}
+        <h2 style="margin-top: 30px;">Povijest Zapisa</h2>
+    {% endif %}
+    
+    {{ block.super }}
+
+    <!-- Inicijalizacija Select2 Widgeta -->
+    <script>
+        (function($) {
+            $(document).ready(function() {
+                $('#folder_select').select2({
+                    placeholder: "Pretraži i odaberi folder...",
+                    allowClear: true
+                });
+            });
+        })(django.jQuery);
+    </script>
+
+{% endblock %}
