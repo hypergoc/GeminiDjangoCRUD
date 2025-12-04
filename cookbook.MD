@@ -94,6 +94,6 @@ za napraviti cms ode cca - 20000 tokena - stvar je besplatna skoro
 
 Ima gumb history - tu mu je kontekst...pa ne moraš folder slati...
 
-Ako kaj zapne - 095 533 533 6 - Goc
+Ako kaj zapne wap- 095 533 533 6 - Goc
 
 Disclamer - kod je odvratan ali sam ga pisal pred 2 mjeseca, radi kaj treba pa mi se neda prepisivati :)
